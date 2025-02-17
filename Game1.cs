@@ -13,9 +13,13 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
 
         private Texture2D birdSprite;
         private Vector2 birdPosition;
+        private Rectangle birdCollision;
 
         private Texture2D wallSprite;
         private Vector2 wallPosition;
+        private Rectangle wallCollision;
+
+
 
         public Game1()
         {
@@ -26,14 +30,13 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             birdSprite = Content.Load<Texture2D>("FlappyBird");
             birdPosition = Vector2.Zero;
+            birdCollision = new Rectangle(birdPosition.X, birdPosition.Y, 56, 23);
 
             wallSprite = Content.Load<Texture2D>("Blockade");
             wallPosition = new Vector2(750, 0);
-
-
+            wallCollision = new Rectangle(wallPosition.X, wallPosition.Y, 61, 241);
 
             base.Initialize();
         }
@@ -41,12 +44,11 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
+            
             Random rng = new Random();
             int ranInt = rng.Next(0, 4);
 
@@ -87,6 +89,11 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 birdPosition.Y -= 15;
+            }
+
+            if (birdCollision.Intersects(wallCollision))
+            {
+                Exit();
             }
 
             base.Update(gameTime);
