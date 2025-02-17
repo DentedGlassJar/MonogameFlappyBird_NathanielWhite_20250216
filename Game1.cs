@@ -9,6 +9,12 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private Texture2D birdSprite;
+        private Vector2 birdPosition;
+
+        private Texture2D wallSprite;
+        private Vector2 wallPosition;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -19,6 +25,11 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            birdSprite = Content.Load<Texture2D>("FlappyBird");
+            birdPosition = Vector2.Zero;
+
+            wallSprite = Content.Load<Texture2D>("Blockade");
+            wallPosition = Vector2.Zero;
 
             base.Initialize();
         }
@@ -35,7 +46,13 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+
+            birdPosition.Y += 10;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                birdPosition.Y -= 15;
+            }
 
             base.Update(gameTime);
         }
@@ -45,6 +62,10 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(wallSprite, wallPosition, Color.White);
+            _spriteBatch.Draw(birdSprite, birdPosition, Color.White);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
