@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Security.Cryptography;
 
 namespace MonogameFlappyBird_NathanielWhite_20250216
 {
@@ -31,6 +33,8 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             wallSprite = Content.Load<Texture2D>("Blockade");
             wallPosition = new Vector2(750, 0);
 
+
+
             base.Initialize();
         }
 
@@ -43,9 +47,11 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
 
         protected override void Update(GameTime gameTime)
         {
+            Random rng = new Random();
+            int ranInt = rng.Next(0, 4);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
 
             // Updates for the walls
             wallPosition.X -= 10;
@@ -53,6 +59,26 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             if (wallPosition.X == 0)
             {
                 wallPosition.X = 750;
+
+                if (ranInt == 0)
+                {
+                    wallPosition.Y = 0;
+                }
+
+                if (ranInt == 1)
+                {
+                    wallPosition.Y = 100;
+                }
+
+                if (ranInt == 2)
+                {
+                    wallPosition.Y = 200;
+                }
+
+                if (ranInt == 3)
+                {
+                    wallPosition.Y = 300;
+                }
             }
             
             // Updates for the bird
