@@ -32,11 +32,11 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
         {
             birdSprite = Content.Load<Texture2D>("FlappyBird");
             birdPosition = Vector2.Zero;
-            birdCollision = new Rectangle(birdPosition.X, birdPosition.Y, 56, 23);
+            birdCollision = new Rectangle((int)birdPosition.X, (int)birdPosition.Y, 56, 23);
 
             wallSprite = Content.Load<Texture2D>("Blockade");
             wallPosition = new Vector2(750, 0);
-            wallCollision = new Rectangle(wallPosition.X, wallPosition.Y, 61, 241);
+            wallCollision = new Rectangle((int)wallPosition.X, (int)wallPosition.Y, 61, 241);
 
             base.Initialize();
         }
