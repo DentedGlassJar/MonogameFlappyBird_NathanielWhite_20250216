@@ -29,7 +29,7 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
             birdPosition = Vector2.Zero;
 
             wallSprite = Content.Load<Texture2D>("Blockade");
-            wallPosition = Vector2.Zero;
+            wallPosition = new Vector2(750, 0);
 
             base.Initialize();
         }
@@ -47,6 +47,15 @@ namespace MonogameFlappyBird_NathanielWhite_20250216
                 Exit();
 
 
+            // Updates for the walls
+            wallPosition.X -= 10;
+            
+            if (wallPosition.X == 0)
+            {
+                wallPosition.X = 750;
+            }
+            
+            // Updates for the bird
             birdPosition.Y += 10;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
